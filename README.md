@@ -29,6 +29,26 @@ sudo -i -u postgres psql
 CREATE EXTENSION pg_cron;
 ```
 
+- Create a test table for checking is it working or not.
+```sql
+CREATE TABLE postgresql_cron_job_test (
+    id SERIAL PRIMARY KEY,
+    job_name TEXT NOT NULL,
+    schedule TEXT NOT NULL,
+    last_run TIMESTAMP DEFAULT now()
+);
+```
+
+```sql
+SELECT cron.schedule('*/1 * * * *', $$INSERT INTO postgresql_cron_job_test (job_name, schedule) 
+VALUES 
+    ('Daily Cleanup', '0 2 * * *'),
+    ('Weekly Backup', '0 3 * * 0'),
+    ('Hourly Report', '0 * * * *'),
+    ('Database Vacuum', '30 1 * * *');$$);
+```
+
+
 
 
 
