@@ -65,6 +65,25 @@ select * from cron.job;
 SELECT cron.unschedule(jobid);
 ```
 
+- cron job details including starting time,error message and end time
+```sql
+select * from cron.job_run_details order by start_time desc limit 5;
+```
 
+
+- Use background worker instead of connection
+```bash
+# Schedule jobs via background workers instead of localhost connections
+cron.use_background_workers = on
+# Increase the number of available background workers from the default of 8
+max_worker_processes = 20
+```
+
+- Change the default `cron.max_running_jobs	32` as your need in `postgresql.conf` file
+```bash
+cron.max_running_jobs = 50
+```
+
+Maximum number of jobs that can be running at the same time.
 
 
