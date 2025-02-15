@@ -39,6 +39,12 @@ CREATE TABLE postgresql_cron_job_test (
 );
 ```
 
+- Syntax of enable a cronjob
+```sql
+SELECT cron.schedule('< cron expression >', $$ < SQL Command | Calling Procedure | Calling Function | Calling Trigger > $$ 
+```
+
+- Example of a cronjob
 ```sql
 SELECT cron.schedule('*/1 * * * *', $$INSERT INTO postgresql_cron_job_test (job_name, schedule) 
 VALUES 
@@ -47,6 +53,7 @@ VALUES
     ('Hourly Report', '0 * * * *'),
     ('Database Vacuum', '30 1 * * *');$$);
 ```
+This cronjob run every minute and insert the defined 5 rows in the `postgresql_cron_job_test` table.
 
 
 
