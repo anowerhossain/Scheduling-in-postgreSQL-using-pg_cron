@@ -41,7 +41,7 @@ CREATE TABLE postgresql_cron_job_test (
 
 - Syntax of enable a cronjob
 ```sql
-SELECT cron.schedule('< cron expression >', $$ < SQL Command | Calling Procedure | Calling Function | Calling Trigger > $$ 
+SELECT cron.schedule('< cron expression >', $$ < SQL Command | Calling Procedure | Calling Function | Calling Trigger > $$ );
 ```
 
 - Example of a cronjob
@@ -55,6 +55,15 @@ VALUES
 ```
 This cronjob run every minute and insert the defined 5 rows in the `postgresql_cron_job_test` table.
 
+- See the all schedule jobs from cronjob
+```sql
+select * from cron.job;
+```
+
+- To unschedule or remove a job from scheduling find the `jobid` from the  `select * from cron.job;` table and run `SELECT cron.unschedule(jobid);`
+```sql
+SELECT cron.unschedule(jobid);
+```
 
 
 
