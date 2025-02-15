@@ -65,13 +65,13 @@ select * from cron.job;
 SELECT cron.unschedule(jobid);
 ```
 
-- cron job details including starting time,error message and end time
+- cron job details including starting time,error message and end time.
 ```sql
 select * from cron.job_run_details order by start_time desc limit 5;
 ```
 
 
-- Use background worker instead of connection
+- Use background worker instead of connection in `postgresql.conf` file.
 ```bash
 # Schedule jobs via background workers instead of localhost connections
 cron.use_background_workers = on
@@ -79,7 +79,7 @@ cron.use_background_workers = on
 max_worker_processes = 20
 ```
 
-- Change the default `cron.max_running_jobs	32` as your need in `postgresql.conf` file
+- Change the default `cron.max_running_jobs	32` as your need in `postgresql.conf` file.
 ```bash
 cron.max_running_jobs = 50
 ```
